@@ -1,6 +1,6 @@
-type InputType = "TEXT" | "TEXT_AREA" | "NUMBER" | "SELECT";
+export type InputType = "TEXT" | "TEXT_AREA" | "NUMBER" | "SELECT";
 
-interface IQuestion {
+export interface IQuestion {
   id: string;
   label: string;
   type: InputType;
@@ -8,13 +8,13 @@ interface IQuestion {
   options?: string[] | number[];
 }
 
-interface IAnswer {
+export interface IAnswer {
   id: string;
   questionId: string;
   value: string | number;
 }
 
-interface IValidation {
+export interface IValidation {
   id: string;
   questionId: string;
   format: RegExp | string;
