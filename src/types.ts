@@ -20,3 +20,8 @@ export interface IValidation {
   format: RegExp | string;
   message: string;
 }
+
+export interface Action {
+  type: string;
+  data: { [key: string]: any };
+}

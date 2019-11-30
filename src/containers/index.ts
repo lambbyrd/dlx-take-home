@@ -1,3 +1,3 @@
-export * from "./Login";
-export * from "./StartLoan";
-export * from "./RestOfLoan";
+export * from "./LoginPage";
+export * from "./LandingPage";
+export * from "./DecisionPage";
