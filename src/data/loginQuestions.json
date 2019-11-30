@@ -1,0 +1,12 @@
+{
+  "username": {
+    "label": "Enter your email.",
+    "type": "EMAIL",
+    "required": true
+  },
+  "password": {
+    "label": "Enter your password.",
+    "type": "PASSWORD",
+    "required": true
+  }
+}
