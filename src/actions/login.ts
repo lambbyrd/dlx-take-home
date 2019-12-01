@@ -2,8 +2,12 @@ import {
   GET_LOGIN_SUCCESS,
   GET_LOGIN_FAILURE,
   POST_LOGIN_FAILURE,
-  POST_LOGIN_SUCCESS
+  POST_LOGIN_SUCCESS,
+  SAVE_QUESTION_ANSWER
 } from "../consts";
+
+import { getLoginQuestions } from "../api";
+import { Dispatch } from "redux";
 
 export const getLoginSuccess = (data: any) => ({
   type: GET_LOGIN_SUCCESS,
@@ -25,6 +29,20 @@ export const postLoginFailure = (data: any) => ({
   data
 });
 
-export const getLoginPages = () => {};
+export const saveQuestionAnswer = (path: string, value: string | number) => ({
+  type: SAVE_QUESTION_ANSWER,
+  data: {
+    path,
+    value
+  }
+});
+
+export const getLoginPages = () => (dispatch: Dispatch) => {
+  getLoginQuestions()
+    .then(data => {
+      dispatch(getLoginSuccess(data));
+    })
+    .catch(err => dispatch(getLoginFailure(err)));
+};
 
 export const postLogin = () => {};

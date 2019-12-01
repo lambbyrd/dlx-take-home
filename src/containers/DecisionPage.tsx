@@ -1,7 +1,7 @@
 import * as React from "react";
 
-export const RestOfLoan = () => {
+export const Decision = () => {
   return <div>Rest of Loan</div>;
 };
 
-export default RestOfLoan;
+export default Decision;

@@ -2,6 +2,10 @@ import Questions from "./data/questions.json";
 import LoginQuestions from "./data/loginQuestions.json";
 import Login from "./data/login.json";
 
+const apiEndpoint = "http://localhost:3004/";
+
+const getJson = (resp: Response) => resp.json();
+
 const fakeEndpoints = {
   "/questions": {
     success: Questions,
@@ -20,7 +24,7 @@ const fakeEndpoints = {
 const successOrFail = (data: { endpoint: string; body: any }) => {
   switch (data.endpoint) {
     case "/questions":
-    case "/login/question":
+    case "/login/questions":
       return true;
     case "/login":
       if (data.body.username && data.body.password) {
@@ -42,10 +46,16 @@ export const fakeFetch = (
 
   return new Promise((resolve, reject) => {
     if (shouldReturn) {
-      const data = (fakeData.success as unknown) as string;
-      const response = new Response(data);
+      const data = fakeData.success;
+      // const response = new Response(data, {
+      //   status: 200,
+      //   statusText: "SUCCESS",
+      //   headers: {
+      //     "Content-Type": "application/json"
+      //   }
+      // });
       setTimeout(() => {
-        resolve(response);
+        resolve(data);
       }, 1000);
     } else {
       const data = (fakeData.failure as unknown) as string;
@@ -57,28 +67,31 @@ export const fakeFetch = (
   });
 };
 
-const fakeRequestInfo: any = {
+const headers: any = {
   headers: {
     "Content-Type": "application/json"
   }
 };
 
-export const getQuestions = async () =>
-  await fakeFetch("/questions", { ...fakeRequestInfo, method: "GET" });
+export const getLandingQuestions = async () =>
+  await fetch(`${apiEndpoint}landingPageQuestions`, { method: "GET" });
 
-export const getLoginQuestions = async () =>
-  await fakeFetch("/login/questions", { ...fakeRequestInfo, method: "GET" });
+export const getLoginQuestions = () =>
+  fetch(`${apiEndpoint}loginPageQuestions`, {
+    ...headers,
+    method: "GET"
+  }).then(getJson);
 
-export const postLogin = async (data?: {
-  username: string;
-  password: string;
-}) => {
-  return await fakeFetch("/login", {
-    ...fakeRequestInfo,
-    method: "POST",
-    body: JSON.stringify(data)
-  });
-};
+// export const postLogin = async (data?: {
+//   username: string;
+//   password: string;
+// }) => {
+//   return await fakeFetch("/login", {
+//     ...fakeRequestInfo,
+//     method: "POST",
+//     body: JSON.stringify(data)
+//   });
+// };
 
 type IAnswers<T> = {
   [P in keyof T]: {

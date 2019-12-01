@@ -1,13 +1,13 @@
-import { GET_QUESTIONS_FAILURE, GET_QUESTIONS_SUCCESS } from "../consts";
+import { GET_LANDING_FAILURE, GET_LANDING_SUCCESS } from "../consts";
 
-export const getQuestionSuccess = (data: any) => ({
-  type: GET_QUESTIONS_SUCCESS,
+export const getLandingQuestionsSuccess = (data: any) => ({
+  type: GET_LANDING_SUCCESS,
   data
 });
 
-export const getQuestionFailure = (data: any) => ({
-  type: GET_QUESTIONS_FAILURE,
+export const getLandingQuestionsFailure = (data: any) => ({
+  type: GET_LANDING_FAILURE,
   data
 });
 
-export const getQuestions = () => {};
+export const getLandingQuestions = () => {};

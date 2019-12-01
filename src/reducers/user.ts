@@ -3,7 +3,7 @@ import { Action } from "../types";
 
 import { POST_LOGIN_FAILURE, POST_LOGIN_SUCCESS } from "../consts";
 
-const user = (state = {}, action: Action) => {
+const user = (state = {}, action: Action<any>) => {
   switch (action.type) {
     case POST_LOGIN_SUCCESS:
       return {

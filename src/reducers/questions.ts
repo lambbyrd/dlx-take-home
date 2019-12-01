@@ -1,4 +1,4 @@
-import { Action } from "../types";
+import { Action, QuestionsCollection } from "../types";
 import {
   GET_LOGIN_SUCCESS,
   GET_LOGIN_FAILURE,
@@ -6,7 +6,7 @@ import {
   GET_LANDING_SUCCESS
 } from "../consts";
 
-const questions = (state = {}, action: Action) => {
+const questions = (state = {}, action: Action<QuestionsCollection>) => {
   switch (action.type) {
     case GET_LANDING_SUCCESS:
       return {

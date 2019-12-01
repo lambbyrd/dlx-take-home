@@ -1,7 +1,7 @@
 import { POST_DECISION_SUCCESS, POST_DECISION_FAILURE } from "../consts";
 import { Action } from "../types";
 
-const decision = (state = {}, action: Action) => {
+const decision = (state = {}, action: Action<any>) => {
   switch (action.type) {
     case POST_DECISION_SUCCESS:
       return {

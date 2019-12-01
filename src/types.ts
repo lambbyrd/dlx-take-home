@@ -8,6 +8,8 @@ export interface IQuestion {
   options?: string[] | number[];
 }
 
+export type QuestionsCollection = Record<string, IQuestion>;
+
 export interface IAnswer {
   id: string;
   questionId: string;
@@ -21,7 +23,22 @@ export interface IValidation {
   message: string;
 }
 
-export interface Action {
+export interface Action<T> {
   type: string;
-  data: { [key: string]: any };
+  data: T;
+}
+
+export interface ISaveAnswer {
+  path: string;
+  value: string | number;
+}
+
+export interface RootState {
+  user: {
+    isAuthenicated: boolean;
+  };
+  questions: {
+    loginPage: QuestionsCollection;
+    landingPage: QuestionsCollection;
+  };
 }
