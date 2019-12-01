@@ -18,6 +18,12 @@ export const testValidation = (type: string) => {
         test: /\d{1,3}(,\d{3})*(\.\d+)/g,
         message: "This is not a valid currency. Example: 45,000.00"
       };
+    case "EMAIL":
+      return {
+        type: "EMAIL",
+        test: /^[^\s@]+@[^\s@]+\.[^\s@]+$/g,
+        message: "This is not a valid email. Example: somename@somewhere.com"
+      };
     case "PASSWORD":
       return {
         type: "PASSWORD",
@@ -66,6 +72,19 @@ export const checkValidation: Middleware<
             );
           } else {
             store.dispatch(validationError(path, { [key]: undefined }));
+          }
+
+          // This is a HACK. I would probably add a test array which would walk down
+          // multiple validation cases.
+          if (key === "confirmPassword") {
+            const password = get(currentState, `answers.${path}.password`);
+            if (password !== value) {
+              store.dispatch(
+                validationError(path, {
+                  [key]: "Password and Confirm Password need to match"
+                })
+              );
+            }
           }
         }
       }
