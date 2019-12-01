@@ -30,7 +30,9 @@ export interface Action<T> {
 
 export interface ISaveAnswer {
   path: string;
-  value: string | number;
+  value: {
+    [key: string]: string | number;
+  };
 }
 
 export interface RootState {

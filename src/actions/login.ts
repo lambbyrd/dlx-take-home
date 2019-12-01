@@ -29,7 +29,7 @@ export const postLoginFailure = (data: any) => ({
   data
 });
 
-export const saveQuestionAnswer = (path: string, value: string | number) => ({
+export const saveQuestionAnswer = (path: string, value: Object) => ({
   type: SAVE_QUESTION_ANSWER,
   data: {
     path,

@@ -6,21 +6,6 @@ const apiEndpoint = "http://localhost:3004/";
 
 const getJson = (resp: Response) => resp.json();
 
-const fakeEndpoints = {
-  "/questions": {
-    success: Questions,
-    failure: ""
-  },
-  "/login/questions": {
-    success: LoginQuestions,
-    failure: ""
-  },
-  "/login": {
-    success: Login,
-    failure: {}
-  }
-};
-
 const successOrFail = (data: { endpoint: string; body: any }) => {
   switch (data.endpoint) {
     case "/questions":
@@ -36,37 +21,6 @@ const successOrFail = (data: { endpoint: string; body: any }) => {
   }
 };
 
-export const fakeFetch = (
-  input: keyof typeof fakeEndpoints,
-  info: RequestInfo | any
-) => {
-  const fakeData = fakeEndpoints[input];
-
-  const shouldReturn = successOrFail({ endpoint: input, body: info.body });
-
-  return new Promise((resolve, reject) => {
-    if (shouldReturn) {
-      const data = fakeData.success;
-      // const response = new Response(data, {
-      //   status: 200,
-      //   statusText: "SUCCESS",
-      //   headers: {
-      //     "Content-Type": "application/json"
-      //   }
-      // });
-      setTimeout(() => {
-        resolve(data);
-      }, 1000);
-    } else {
-      const data = (fakeData.failure as unknown) as string;
-      const response = new Response(data);
-      setTimeout(() => {
-        reject(response);
-      }, 1000);
-    }
-  });
-};
-
 const headers: any = {
   headers: {
     "Content-Type": "application/json"
@@ -74,7 +28,10 @@ const headers: any = {
 };
 
 export const getLandingQuestions = async () =>
-  await fetch(`${apiEndpoint}landingPageQuestions`, { method: "GET" });
+  await fetch(`${apiEndpoint}landingPageQuestions`, {
+    ...headers,
+    method: "GET"
+  }).then(getJson);
 
 export const getLoginQuestions = () =>
   fetch(`${apiEndpoint}loginPageQuestions`, {

@@ -1,47 +1,26 @@
 import * as React from "react";
-import { Dispatch } from "redux";
 import { get, map } from "lodash";
-import { useDispatch, useSelector } from "react-redux";
 
-import { getLoginPages, saveQuestionAnswer } from "../actions";
+import { getLoginPages } from "../actions";
+import { useCallData, useGetData, handleOnChange } from "../helpers";
 import { Input, Wrapper } from "../components";
 
 import * as Types from "../types";
 
-const handleOnChange = (dispatch: Dispatch, parent: string) => (
-  e: React.SyntheticEvent
-) => {
-  const value = get(e, "target.value");
-  const path = get(e, "target.id");
-
-  dispatch(saveQuestionAnswer(`${parent}.${path}`, value));
-};
-
-const useHandleStore = () => {
-  const dispatch = useDispatch();
-
-  const [questions] = useSelector((state: Types.RootState) => [
-    get(state, "questions.loginPage")
-  ]);
-
-  return [dispatch, questions];
-};
-
 const useHandleState = () => {
-  const [dispatch, questions] = useHandleStore();
+  const [questions, dispatch] = useGetData("questions.loginPage");
+  const [answers] = useGetData("answers.loginPage");
 
-  React.useEffect(() => {
-    dispatch(getLoginPages());
-  }, []);
+  useCallData(getLoginPages);
 
   const saveAnswer = handleOnChange(dispatch, "loginPage");
 
-  return [questions, saveAnswer];
+  return [questions, saveAnswer, answers];
 };
 
+// These could be reused...
 export const Login = () => {
-  const [questions, saveAnswer] = useHandleState();
-
+  const [questions, saveAnswer, answers] = useHandleState();
   return (
     <Wrapper>
       <>
@@ -58,6 +37,7 @@ export const Login = () => {
                   type={type}
                   label={label}
                   onChange={saveAnswer}
+                  value={get(answers, id)}
                 />
               );
             }
