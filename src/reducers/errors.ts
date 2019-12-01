@@ -1,10 +1,10 @@
 import { get } from "lodash";
-import { SAVE_QUESTION_ANSWER } from "../consts";
-import { Action, ISaveAnswer } from "../types";
+import { VALIDATION_ERROR } from "../consts";
+import { Action, IValidationError } from "../types";
 
-const answers = (state = {}, action: Action<ISaveAnswer>) => {
+const errors = (state = {}, action: Action<IValidationError>) => {
   switch (action.type) {
-    case SAVE_QUESTION_ANSWER:
+    case VALIDATION_ERROR:
       return {
         ...state,
         [action.data.path]: {
@@ -19,4 +19,4 @@ const answers = (state = {}, action: Action<ISaveAnswer>) => {
   }
 };
 
-export default answers;
+export default errors;

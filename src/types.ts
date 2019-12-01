@@ -34,6 +34,12 @@ export interface ISaveAnswer {
     [key: string]: string | number;
   };
 }
+export interface IValidationError {
+  path: string;
+  value: {
+    [key: string]: string;
+  };
+}
 
 export interface RootState {
   user: {

@@ -22,9 +22,11 @@ const handleOnChange = (
 interface IProps extends IQuestion {
   value: string | number;
   onChange: (e: React.SyntheticEvent) => void;
+  errors?: string;
 }
 export const Input = (props: IProps) => {
-  const { type, label, id, required, onChange, value } = props;
+  const [checkErrors, setCheckErrors] = React.useState(false);
+  const { type, label, id, required, onChange, value, errors } = props;
   return (
     <TextField
       id={id}
@@ -33,6 +35,10 @@ export const Input = (props: IProps) => {
       type={type}
       onChange={handleOnChange(type, onChange)}
       value={value}
+      onFocus={() => setCheckErrors(false)}
+      onBlur={() => setCheckErrors(true)}
+      error={checkErrors && Boolean(errors)}
+      helperText={checkErrors && errors ? errors : ""}
     />
   );
 };
