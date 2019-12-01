@@ -1,4 +1,4 @@
-export type InputType = "TEXT" | "TEXT_AREA" | "NUMBER" | "SELECT";
+export type InputType = "TEXT" | "TEXT_AREA" | "NUMBER" | "SELECT" | "CURRENCY";
 
 export interface IQuestion {
   id: string;

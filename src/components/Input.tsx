@@ -1,6 +1,8 @@
 import * as React from "react";
 import { get } from "lodash";
 import TextField from "@material-ui/core/TextField";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import AttachMoney from "@material-ui/icons/AttachMoney";
 
 import { IQuestion } from "../types";
 
@@ -9,7 +11,7 @@ const handleOnChange = (
   onChange: (e: React.SyntheticEvent) => void
 ) => (e: React.SyntheticEvent) => {
   if (type === "CURRENCY") {
-    const reg = new RegExp(/\d/g);
+    const reg = new RegExp(/^\d+(\.)|\d+(\,)|\d+(\.\d{2})?$/g);
     const value = get(e, "target.value");
     const match = value.match(reg);
     if (match || !value) {
@@ -39,6 +41,14 @@ export const Input = (props: IProps) => {
       onBlur={() => setCheckErrors(true)}
       error={checkErrors && Boolean(errors)}
       helperText={checkErrors && errors ? errors : ""}
+      InputProps={{
+        startAdornment:
+          type === "CURRENCY" && value ? (
+            <InputAdornment position="start">
+              <AttachMoney style={{ width: "20px", height: "20px" }} />
+            </InputAdornment>
+          ) : null
+      }}
     />
   );
 };

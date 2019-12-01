@@ -1,5 +1,5 @@
 import * as React from "react";
-import { map, get, size } from "lodash";
+import { map, get, size, reduce } from "lodash";
 
 import { grabLandingQuestions } from "../actions";
 import { useCallData, useGetData, handleOnChange } from "../helpers";
@@ -17,12 +17,20 @@ const useHandleState = () => {
   return [questions, saveAnswer, answers, errors];
 };
 
+// In real life this would need to be much more robust and probably no need for
+// generics here but could come in useful depening on what is needed
 const isDisabled = <Q extends {}, A extends {}, E extends {}>(
   questions: Q,
   answers: A,
   errors: E
 ) => {
-  if (size(errors) > 0) {
+  let anError: number = 0;
+  map(errors, error => {
+    if (error) {
+      anError++;
+    }
+  });
+  if (anError > 0) {
     return true;
   }
 

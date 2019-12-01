@@ -27,7 +27,7 @@
     "question5": {
       "id": "question5",
       "label": "Estimated Personal Credit Score",
-      "type": "NUMBER",
+      "type": "CREDIT_SCORE",
       "required": true
     }
   },
