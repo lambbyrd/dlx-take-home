@@ -3,7 +3,8 @@ import { Dispatch } from "redux";
 import {
   POST_DECISION_SUCCESS,
   POST_DECISION_FAILURE,
-  BAD_REQUEST
+  BAD_REQUEST,
+  CLEAR_DECISION
 } from "../consts";
 
 import { checkApplication } from "../fakeBackend";
@@ -28,6 +29,11 @@ export const badRequest = () => ({
     approved: undefined,
     message: "BAD_REQUEST: Something went wrong with your application."
   }
+});
+
+export const clearDecision = () => ({
+  type: CLEAR_DECISION,
+  data: {}
 });
 
 export const sendApplication = (

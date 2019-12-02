@@ -2,8 +2,7 @@ import {
   GET_LOGIN_SUCCESS,
   GET_LOGIN_FAILURE,
   POST_LOGIN_FAILURE,
-  POST_LOGIN_SUCCESS,
-  SAVE_QUESTION_ANSWER
+  POST_LOGIN_SUCCESS
 } from "../consts";
 
 import { getLoginQuestions, postUser, getToken } from "../api";
@@ -27,14 +26,6 @@ export const postLoginSuccess = (data: any) => ({
 export const postLoginFailure = (data: any) => ({
   type: POST_LOGIN_FAILURE,
   data
-});
-
-export const saveQuestionAnswer = (path: string, value: Object) => ({
-  type: SAVE_QUESTION_ANSWER,
-  data: {
-    path,
-    value
-  }
 });
 
 export const getLoginPages = () => (dispatch: Dispatch) => {

@@ -1,7 +1,8 @@
 import {
   POST_DECISION_SUCCESS,
   POST_DECISION_FAILURE,
-  BAD_REQUEST
+  BAD_REQUEST,
+  CLEAR_DECISION
 } from "../consts";
 import { Action } from "../types";
 
@@ -16,6 +17,10 @@ const decision = (state = {}, action: Action<any>) => {
         ...action.data
       };
     case BAD_REQUEST:
+      return {
+        ...action.data
+      };
+    case CLEAR_DECISION:
       return {
         ...action.data
       };

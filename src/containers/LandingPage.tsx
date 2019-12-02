@@ -2,7 +2,11 @@ import * as React from "react";
 import { map, get } from "lodash";
 import { useHistory } from "react-router-dom";
 
-import { grabLandingQuestions, sendApplication } from "../actions";
+import {
+  grabLandingQuestions,
+  sendApplication,
+  clearDecision
+} from "../actions";
 import {
   useCallData,
   useGetData,
@@ -17,7 +21,9 @@ const useHandleState = () => {
   const [answers] = useGetData("answers.landingPage");
   const [errors] = useGetData("errors.landingPage");
   const [decision] = useGetData("decision");
+
   useCallData(grabLandingQuestions);
+  useCallData(clearDecision);
 
   const saveAnswer = handleOnChange(dispatch, "landingPage");
   return [questions, saveAnswer, answers, errors, dispatch, decision];
