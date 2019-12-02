@@ -4,9 +4,17 @@ I based this off of Create React App. I added Concurrently and Json-server with 
 
 ### Background
 
-I tried my best to follow everything in the spec given. One major change is going to be the mock fetch... I felt it was too difficult to mock out fetch with typescript(for the time), and really is taking away from showing what I can do. A lot of mocking it out if trying to stay true to types, lead to a ton of type casting from unknown->any->something else.
+I tried my best to follow everything in the spec given. One major change is going to be the mock fetch requirement. I felt it was too difficult(more like time consuming...) to mock out fetch with typescript, and really thought it was taking away from completing the project.
 
 Instead I thought is would be better to just spin up a simple json server. That way I can use the real fetch, show how I make api calls and focus more on developing on the feature.
+
+With that said, some of the asks around what the backend returns based on data submitted were handled on the frontend. I then would make the appropriate get call...
+
+Json-server is a bit limited in how I have it configured and to make it work how you wanted in the spec, I felt would fall further outside the scope of this project.
+
+I hope that above call is okay, and I'm happy to talk more indepth as to why made that decision.
+
+Also... this thing ain't sexy!
 
 ### Get Started
 
@@ -22,6 +30,10 @@ Now you should be able use my script below to start the project.
 ### `yarn develop`
 
 This script starts up the json server and then starts the react app.
+
+### Last Thought
+
+There is a bug that randomly shows in validation of Car Make... If you refresh it will fix it. Not quite sure how it gets in that state. Happens very rarely. You probably won't see it, but thought I should call it out.
 
 ## Below is all CRA
 
