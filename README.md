@@ -1,3 +1,30 @@
+## Setup
+
+I based this off of Create React App. I added Concurrently and Json-server with another script.
+
+### Background
+
+I tried my best to follow everything in the spec given. One major change is going to be the mock fetch... I felt it was too difficult to mock out fetch with typescript(for the time), and really is taking away from showing what I can do. A lot of mocking it out if trying to stay true to types, lead to a ton of type casting from unknown->any->something else.
+
+Instead I thought is would be better to just spin up a simple json server. That way I can use the real fetch, show how I make api calls and focus more on developing on the feature.
+
+### Get Started
+
+Pull down this repo and create a new project. Then complete the steps below.
+
+    - ``` yarn install ```
+    - ``` npm install json-server -g ```
+
+Now you should be able use my script below to start the project.
+
+## Additional Scripts
+
+### `yarn develop`
+
+This script starts up the json server and then starts the react app.
+
+## Below is all CRA
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
