@@ -4,7 +4,7 @@ interface IApplicationResponse {
   decision: string;
 }
 
-const toNumber = (str: string) => Number(str.replace(",", ""));
+export const toNumber = (str: string) => Number(str.replace(/\,/g, ""));
 
 export const checkApplication = (answers: {
   [key: string]: string | number;

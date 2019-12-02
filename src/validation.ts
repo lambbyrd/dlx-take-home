@@ -4,6 +4,7 @@ import { map, get, isNil } from "lodash";
 import { SAVE_QUESTION_ANSWER } from "./consts";
 import { validationError } from "./actions";
 
+// This should be an enum
 export const testValidation = (type: string) => {
   switch (type) {
     case "CREDIT_SCORE":

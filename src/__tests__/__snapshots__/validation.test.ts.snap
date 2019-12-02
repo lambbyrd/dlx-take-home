@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`testValidation() Should return correct object 1`] = `
+Object {
+  "message": "You need to have a number between 300-850",
+  "test": /\\^\\[3-7\\]\\[0-9\\]\\[0-9\\]\\$\\|\\^\\[8\\]\\[0-4\\]\\[0-9\\]\\$\\|\\^\\[8\\]\\[5\\]\\[0\\]\\$/g,
+  "type": "CREDIT_SCORE",
+}
+`;
