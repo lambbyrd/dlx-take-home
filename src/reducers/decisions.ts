@@ -1,17 +1,23 @@
-import { POST_DECISION_SUCCESS, POST_DECISION_FAILURE } from "../consts";
+import {
+  POST_DECISION_SUCCESS,
+  POST_DECISION_FAILURE,
+  BAD_REQUEST
+} from "../consts";
 import { Action } from "../types";
 
 const decision = (state = {}, action: Action<any>) => {
   switch (action.type) {
     case POST_DECISION_SUCCESS:
       return {
-        applicationApproved: true,
-        message: action.data
+        ...action.data
       };
     case POST_DECISION_FAILURE:
       return {
-        applicationApproved: false,
-        message: action.data
+        ...action.data
+      };
+    case BAD_REQUEST:
+      return {
+        ...action.data
       };
     default:
       return state;

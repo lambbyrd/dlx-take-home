@@ -34,12 +34,12 @@ export const checkApplication = (answers: {
     : isApproved
     ? {
         navPath: "/login",
-        apiPath: "/decisionApproved",
+        apiPath: "decisionApproved",
         decision: "APPROVED"
       }
     : {
         navPath: "/disqualified",
-        apiPath: "/decisionDenied",
+        apiPath: "decisionDenied",
         decision: "DENIED"
       };
 };

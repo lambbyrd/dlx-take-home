@@ -15,15 +15,23 @@ const useHandleState = () => {
   const [questions, dispatch] = useGetData("questions.landingPage");
   const [answers] = useGetData("answers.landingPage");
   const [errors] = useGetData("errors.landingPage");
+  const [decision] = useGetData("decision");
   useCallData(grabLandingQuestions);
 
   const saveAnswer = handleOnChange(dispatch, "landingPage");
-  return [questions, saveAnswer, answers, errors, dispatch];
+  return [questions, saveAnswer, answers, errors, dispatch, decision];
 };
 
 // These could be reused...
 export const StartLoan = () => {
-  const [questions, saveAnswer, answers, errors, dispatch] = useHandleState();
+  const [
+    questions,
+    saveAnswer,
+    answers,
+    errors,
+    dispatch,
+    decision
+  ] = useHandleState();
 
   return (
     <Wrapper>
@@ -54,6 +62,7 @@ export const StartLoan = () => {
             justifyContent: "flex-end"
           }}
         >
+          {decision && decision.message && <div>{decision.message}</div>}
           <SubmitButton
             disabled={isDisabled(questions, answers, errors)}
             label="Submit"

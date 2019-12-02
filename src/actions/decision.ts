@@ -17,14 +17,17 @@ export const applicationSuccess = (value: Object) => ({
 export const applicationFailure = () => ({
   type: POST_DECISION_FAILURE,
   data: {
-    approved: false,
+    approved: undefined,
     message: "There was an error approving you loan. Check back later."
   }
 });
 
-export const badRequest = (data: boolean) => ({
+export const badRequest = () => ({
   type: BAD_REQUEST,
-  data
+  data: {
+    approved: undefined,
+    message: "BAD_REQUEST: Something went wrong with your application."
+  }
 });
 
 export const sendApplication = (answers: {
@@ -39,7 +42,7 @@ export const sendApplication = (answers: {
         // This should never fire
         console.log("success", data);
       })
-      .catch(err => dispatch(badRequest(true)));
+      .catch(err => dispatch(badRequest()));
   } else {
     const { apiPath, navPath } = decision;
     getDecision(apiPath)
@@ -50,6 +53,4 @@ export const sendApplication = (answers: {
         dispatch(applicationFailure());
       });
   }
-
-  console.log({ decision });
 };
