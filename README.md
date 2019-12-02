@@ -12,8 +12,8 @@ Instead I thought is would be better to just spin up a simple json server. That 
 
 Pull down this repo and create a new project. Then complete the steps below.
 
-    - ``` yarn install ```
-    - ``` npm install json-server -g ```
+    - yarn install
+    - npm install json-server -g
 
 Now you should be able use my script below to start the project.
 
