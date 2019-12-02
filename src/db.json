@@ -60,12 +60,12 @@
       "isAuthenticated": false
     }
   },
-  "decision": {
-    "success": {
-      "message": "Some message"
-    },
-    "failure": {
-      "message": "Some message"
-    }
+  "decisionApproved": {
+    "approved": true,
+    "message": "Congrats. You have been approved for this loan!"
+  },
+  "decisionDenied": {
+    "approved": false,
+    "message": "I'm sorry your loan application was denied. If you have any questions please call 1 (888) 453-7898."
   }
 }

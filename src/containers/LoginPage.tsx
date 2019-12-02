@@ -2,7 +2,12 @@ import * as React from "react";
 import { get, map, size } from "lodash";
 
 import { getLoginPages } from "../actions";
-import { useCallData, useGetData, handleOnChange } from "../helpers";
+import {
+  useCallData,
+  useGetData,
+  handleOnChange,
+  isDisabled
+} from "../helpers";
 import { Input, Wrapper, SubmitButton } from "../components";
 
 import * as Types from "../types";
@@ -15,28 +20,6 @@ const useHandleState = () => {
 
   const saveAnswer = handleOnChange(dispatch, "loginPage");
   return [questions, saveAnswer, answers, errors];
-};
-
-const isDisabled = <Q extends {}, A extends {}, E extends {}>(
-  questions: Q,
-  answers: A,
-  errors: E
-) => {
-  let anError: number = 0;
-  map(errors, error => {
-    if (error) {
-      anError++;
-    }
-  });
-  if (anError > 0) {
-    return true;
-  }
-
-  if (size(questions) !== size(answers)) {
-    return true;
-  }
-
-  return false;
 };
 
 // These could be reused...

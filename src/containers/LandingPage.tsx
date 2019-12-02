@@ -1,10 +1,14 @@
 import * as React from "react";
-import { map, get, size, reduce } from "lodash";
+import { map, get } from "lodash";
 
-import { grabLandingQuestions } from "../actions";
-import { useCallData, useGetData, handleOnChange } from "../helpers";
+import { grabLandingQuestions, sendApplication } from "../actions";
+import {
+  useCallData,
+  useGetData,
+  handleOnChange,
+  isDisabled
+} from "../helpers";
 import { Input, Wrapper, SubmitButton } from "../components";
-
 import * as Types from "../types";
 
 const useHandleState = () => {
@@ -14,35 +18,12 @@ const useHandleState = () => {
   useCallData(grabLandingQuestions);
 
   const saveAnswer = handleOnChange(dispatch, "landingPage");
-  return [questions, saveAnswer, answers, errors];
-};
-
-// In real life this would need to be much more robust and probably no need for
-// generics here but could come in useful depening on what is needed
-const isDisabled = <Q extends {}, A extends {}, E extends {}>(
-  questions: Q,
-  answers: A,
-  errors: E
-) => {
-  let anError: number = 0;
-  map(errors, error => {
-    if (error) {
-      anError++;
-    }
-  });
-  if (anError > 0) {
-    return true;
-  }
-
-  if (size(questions) !== size(answers)) {
-    return true;
-  }
-  return false;
+  return [questions, saveAnswer, answers, errors, dispatch];
 };
 
 // These could be reused...
 export const StartLoan = () => {
-  const [questions, saveAnswer, answers, errors] = useHandleState();
+  const [questions, saveAnswer, answers, errors, dispatch] = useHandleState();
 
   return (
     <Wrapper>
@@ -76,7 +57,7 @@ export const StartLoan = () => {
           <SubmitButton
             disabled={isDisabled(questions, answers, errors)}
             label="Submit"
-            onClick={() => console.log("shit fired")}
+            onClick={() => dispatch(sendApplication(answers))}
           />
         </div>
       </>

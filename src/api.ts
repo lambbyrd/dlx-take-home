@@ -1,25 +1,6 @@
-import Questions from "./data/questions.json";
-import LoginQuestions from "./data/loginQuestions.json";
-import Login from "./data/login.json";
-
 const apiEndpoint = "http://localhost:3004/";
 
 const getJson = (resp: Response) => resp.json();
-
-const successOrFail = (data: { endpoint: string; body: any }) => {
-  switch (data.endpoint) {
-    case "/questions":
-    case "/login/questions":
-      return true;
-    case "/login":
-      if (data.body.username && data.body.password) {
-        return true;
-      }
-      return false;
-    default:
-      return false;
-  }
-};
 
 const headers: any = {
   headers: {
@@ -27,14 +8,26 @@ const headers: any = {
   }
 };
 
-export const getLandingQuestions = async () =>
-  await fetch(`${apiEndpoint}landingPageQuestions`, {
+export const getLandingQuestions = () =>
+  fetch(`${apiEndpoint}landingPageQuestions`, {
     ...headers,
     method: "GET"
   }).then(getJson);
 
 export const getLoginQuestions = () =>
   fetch(`${apiEndpoint}loginPageQuestions`, {
+    ...headers,
+    method: "GET"
+  }).then(getJson);
+
+export const getBadRequest = () =>
+  fetch(`${apiEndpoint}landingPageQuestions`, {
+    ...headers,
+    method: "d"
+  }).then(getJson);
+
+export const getDecision = (endPoint: string) =>
+  fetch(`${apiEndpoint}${endPoint}`, {
     ...headers,
     method: "GET"
   }).then(getJson);
@@ -55,6 +48,3 @@ type IAnswers<T> = {
     value: string | number;
   };
 };
-
-export const postApplication = (data: IAnswers<typeof Questions>) =>
-  data.question1.value;
