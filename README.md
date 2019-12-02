@@ -8,11 +8,9 @@ I tried my best to follow everything in the spec given. One major change is goin
 
 Instead I thought is would be better to just spin up a simple json server. That way I can use the real fetch, show how I make api calls and focus more on developing on the feature.
 
-With that said, some of the asks around what the backend returns based on data submitted were handled on the frontend. I then would make the appropriate get call...
+With that said, some of the asks around what the backend returns based on data submitted were handled on the frontend. I would then make the appropriate get call. The Json-server I have set up is limited in how I configured it. To make the "backend" work how it was detailed in the spec would have been more work outside of the feature. So I kept it simple.
 
-Json-server is a bit limited in how I have it configured and to make it work how you wanted in the spec, I felt would fall further outside the scope of this project.
-
-I hope that above call is okay, and I'm happy to talk more indepth as to why made that decision.
+I hope that above call is okay, and I'm happy to talk more indepth as to why I made that decision.
 
 Also... this thing ain't sexy!
 
