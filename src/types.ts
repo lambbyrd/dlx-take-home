@@ -1,5 +1,14 @@
 export type InputType = "TEXT" | "TEXT_AREA" | "NUMBER" | "SELECT" | "CURRENCY";
 
+export type LandingQuestions =
+  | "question1"
+  | "question2"
+  | "question3"
+  | "question4"
+  | "question5";
+
+export type LoginQuestions = "username" | "password" | "confirmPassword";
+
 export interface IQuestion {
   id: string;
   label: string;
@@ -8,7 +17,19 @@ export interface IQuestion {
   options?: string[] | number[];
 }
 
-export type QuestionsCollection = Record<string, IQuestion>;
+// This is a mapped type
+export type AnswerOrError<T> = {
+  [P in keyof T]?: string | number;
+};
+
+export type LandingQuestionsCollection = Record<LandingQuestions, IQuestion>;
+export type LoginQuestionsCollection = Record<LoginQuestions, IQuestion>;
+
+export type LandingAnswers = AnswerOrError<LandingQuestionsCollection>;
+export type LandingErrors = AnswerOrError<LandingQuestionsCollection>;
+
+export type LoginAnswers = AnswerOrError<LoginQuestionsCollection>;
+export type LoginErrors = AnswerOrError<LoginQuestionsCollection>;
 
 export interface IAnswer {
   id: string;
@@ -46,7 +67,15 @@ export interface RootState {
     isAuthenicated: boolean;
   };
   questions: {
-    loginPage: QuestionsCollection;
-    landingPage: QuestionsCollection;
+    loginPage: LoginQuestionsCollection;
+    landingPage: LandingQuestionsCollection;
+  };
+  errors: {
+    loginPage?: LoginErrors;
+    landingPage?: LandingErrors;
+  };
+  answers: {
+    loginPage?: LoginAnswers;
+    landingPage?: LandingAnswers;
   };
 }
