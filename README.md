@@ -1,10 +1,10 @@
 ## Setup
 
-I based this off of Create React App. I added Concurrently and Json-server with another script.
+I based this app off of Create React App. I added Concurrently and Json-server with another script. I assume that you have node and yarn installed.
 
 ### Background
 
-I tried my best to follow everything in the spec given. One major change is going to be the mock fetch requirement. I felt it was too difficult(more like time consuming...) to mock out fetch with typescript, and really thought it was taking away from completing the project.
+I tried my best to follow everything in the spec. One major change is going to be the mock fetch requirement. I felt it was too time consuming to mock out fetch with typescript, and really thought it was taking away from completing the project.
 
 Instead I thought is would be better to just spin up a simple json server. That way I can use the real fetch, show how I make api calls and focus more on developing on the feature.
 
