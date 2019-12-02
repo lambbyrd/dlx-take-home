@@ -11,12 +11,12 @@ import {
 } from "../helpers";
 import { Input, Wrapper, SubmitButton } from "../components";
 
-import * as Types from "../types";
+import { LoginQuestionsCollection, LoginAnswers, LoginErrors } from "../types";
 
 const useHandleState = () => {
   const [questions, dispatch] = useGetData("questions.loginPage");
-  const [answers] = useGetData("answers.loginPage");
-  const [errors] = useGetData("errors.loginPage");
+  const [answers] = useGetData("answers.loginPage") as LoginAnswers[];
+  const [errors] = useGetData("errors.loginPage") as LoginErrors[];
   useCallData(getLoginPages);
 
   const saveAnswer = handleOnChange(dispatch, "loginPage");
@@ -33,23 +33,20 @@ export const Login = () => {
       <>
         <p>Sign Up</p>
         {questions &&
-          map(
-            questions as Types.RootState["questions"]["loginPage"],
-            question => {
-              const { id, type, label, required } = question;
-              return (
-                <Input
-                  id={id}
-                  required={required}
-                  type={type}
-                  label={label}
-                  onChange={saveAnswer}
-                  value={get(answers, id)}
-                  errors={get(errors, id)}
-                />
-              );
-            }
-          )}
+          map(questions as LoginQuestionsCollection, question => {
+            const { id, type, label, required } = question;
+            return (
+              <Input
+                id={id}
+                required={required}
+                type={type}
+                label={label}
+                onChange={saveAnswer}
+                value={get(answers, id)}
+                errors={get(errors, id)}
+              />
+            );
+          })}
         <div
           style={{
             display: "flex",

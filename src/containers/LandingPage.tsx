@@ -14,12 +14,16 @@ import {
   isDisabled
 } from "../helpers";
 import { Input, Wrapper, SubmitButton } from "../components";
-import * as Types from "../types";
+import {
+  LandingQuestionsCollection,
+  LandingAnswers,
+  LandingErrors
+} from "../types";
 
 const useHandleState = () => {
   const [questions, dispatch] = useGetData("questions.landingPage");
-  const [answers] = useGetData("answers.landingPage");
-  const [errors] = useGetData("errors.landingPage");
+  const [answers] = useGetData("answers.landingPage") as LandingAnswers[];
+  const [errors] = useGetData("errors.landingPage") as LandingErrors[];
   const [decision] = useGetData("decision");
 
   useCallData(grabLandingQuestions);
@@ -46,23 +50,20 @@ export const StartLoan = () => {
       <>
         <p>Apply For Auto Loan</p>
         {questions &&
-          map(
-            questions as Types.RootState["questions"]["landingPage"],
-            question => {
-              const { id, type, label, required } = question;
-              return (
-                <Input
-                  id={id}
-                  required={required}
-                  type={type}
-                  label={label}
-                  onChange={saveAnswer}
-                  value={get(answers, id) || ""}
-                  errors={get(errors, id)}
-                />
-              );
-            }
-          )}
+          map(questions as LandingQuestionsCollection, question => {
+            const { id, type, label, required } = question;
+            return (
+              <Input
+                id={id}
+                required={required}
+                type={type}
+                label={label}
+                onChange={saveAnswer}
+                value={get(answers, id) || ""}
+                errors={get(errors, id)}
+              />
+            );
+          })}
         <div
           style={{
             display: "flex",
