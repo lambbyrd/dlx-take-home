@@ -32,19 +32,12 @@ export const getDecision = (endPoint: string) =>
     method: "GET"
   }).then(getJson);
 
-// export const postLogin = async (data?: {
-//   username: string;
-//   password: string;
-// }) => {
-//   return await fakeFetch("/login", {
-//     ...fakeRequestInfo,
-//     method: "POST",
-//     body: JSON.stringify(data)
-//   });
-// };
+export const getToken = () =>
+  fetch(`${apiEndpoint}auth`, { ...headers, method: "GET" }).then(getJson);
 
-type IAnswers<T> = {
-  [P in keyof T]: {
-    value: string | number;
-  };
-};
+export const postUser = (data: { username: string; password: string }) =>
+  fetch(`${apiEndpoint}user`, {
+    ...headers,
+    method: "POST",
+    body: JSON.stringify(data)
+  }).then(getJson);

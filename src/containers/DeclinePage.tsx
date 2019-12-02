@@ -3,7 +3,7 @@ import * as React from "react";
 import { useGetData } from "../helpers";
 import { Wrapper } from "../components";
 
-export const DecisionPage = () => {
+export const DeclinePage = () => {
   const [message] = useGetData("decision.message");
   return (
     <Wrapper>
@@ -12,4 +12,4 @@ export const DecisionPage = () => {
   );
 };
 
-export default DecisionPage;
+export default DeclinePage;

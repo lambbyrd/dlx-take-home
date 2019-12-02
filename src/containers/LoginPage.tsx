@@ -1,7 +1,8 @@
 import * as React from "react";
-import { get, map, size } from "lodash";
+import { get, map } from "lodash";
+import { useHistory } from "react-router-dom";
 
-import { getLoginPages } from "../actions";
+import { getLoginPages, postLogin } from "../actions";
 import {
   useCallData,
   useGetData,
@@ -19,12 +20,14 @@ const useHandleState = () => {
   useCallData(getLoginPages);
 
   const saveAnswer = handleOnChange(dispatch, "loginPage");
-  return [questions, saveAnswer, answers, errors];
+  return [questions, saveAnswer, answers, errors, dispatch];
 };
 
 // These could be reused...
 export const Login = () => {
-  const [questions, saveAnswer, answers, errors] = useHandleState();
+  const [questions, saveAnswer, answers, errors, dispatch] = useHandleState();
+
+  const history = useHistory();
   return (
     <Wrapper>
       <>
@@ -57,7 +60,14 @@ export const Login = () => {
           <SubmitButton
             disabled={isDisabled(questions, answers, errors)}
             label="Submit"
-            onClick={() => console.log("shit fired")}
+            onClick={() =>
+              dispatch(
+                postLogin(history.push, {
+                  username: get(answers, "username", ""),
+                  password: get(answers, "password", "")
+                })
+              )
+            }
           />
         </div>
       </>

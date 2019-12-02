@@ -51,14 +51,13 @@
       "required": true
     }
   },
+  "user": {
+    "username": "chris@chris.com",
+    "password": "shasta@89@"
+  },
   "auth": {
-    "success": {
-      "isAuthenticated": true,
-      "token": "sdfllkjaf_463487"
-    },
-    "failure": {
-      "isAuthenticated": false
-    }
+    "isAuthenticated": true,
+    "token": "sdfllkjaf_463487"
   },
   "decisionApproved": {
     "approved": true,

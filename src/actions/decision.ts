@@ -30,11 +30,13 @@ export const badRequest = () => ({
   }
 });
 
-export const sendApplication = (answers: {
-  [key: string]: string | number;
-}) => (dispatch: Dispatch) => {
+export const sendApplication = (
+  push: (path: string, state?: any) => void,
+  answers: {
+    [key: string]: string | number;
+  }
+) => (dispatch: Dispatch) => {
   const decision = checkApplication(answers);
-
   if (decision.decision === BAD_REQUEST) {
     //  This a fabricated bad request. A work around for not building out a more robust server
     getBadRequest()
@@ -48,6 +50,7 @@ export const sendApplication = (answers: {
     getDecision(apiPath)
       .then(data => {
         dispatch(applicationSuccess(data));
+        push(navPath);
       })
       .catch(err => {
         dispatch(applicationFailure());

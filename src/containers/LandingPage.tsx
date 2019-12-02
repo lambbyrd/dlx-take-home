@@ -1,5 +1,6 @@
 import * as React from "react";
 import { map, get } from "lodash";
+import { useHistory } from "react-router-dom";
 
 import { grabLandingQuestions, sendApplication } from "../actions";
 import {
@@ -33,6 +34,7 @@ export const StartLoan = () => {
     decision
   ] = useHandleState();
 
+  const history = useHistory();
   return (
     <Wrapper>
       <>
@@ -66,7 +68,7 @@ export const StartLoan = () => {
           <SubmitButton
             disabled={isDisabled(questions, answers, errors)}
             label="Submit"
-            onClick={() => dispatch(sendApplication(answers))}
+            onClick={() => dispatch(sendApplication(history.push, answers))}
           />
         </div>
       </>

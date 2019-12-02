@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { AuthRoute } from "./AuthRoute";
 
-import { StartLoan, Decision, Login } from "../containers";
+import { StartLoan, DecisionPage, Login, DeclinePage } from "../containers";
 
 export const Routes = () => {
   return (
@@ -15,8 +15,11 @@ export const Routes = () => {
         <Route path="/login">
           <Login />
         </Route>
+        <Route path="/decline">
+          <DeclinePage />
+        </Route>
         <AuthRoute path="/decision">
-          <Decision />
+          <DecisionPage />
         </AuthRoute>
       </Switch>
     </Router>

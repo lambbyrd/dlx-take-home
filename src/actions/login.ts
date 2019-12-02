@@ -6,7 +6,7 @@ import {
   SAVE_QUESTION_ANSWER
 } from "../consts";
 
-import { getLoginQuestions } from "../api";
+import { getLoginQuestions, postUser, getToken } from "../api";
 import { Dispatch } from "redux";
 
 export const getLoginSuccess = (data: any) => ({
@@ -45,4 +45,23 @@ export const getLoginPages = () => (dispatch: Dispatch) => {
     .catch(err => dispatch(getLoginFailure(err)));
 };
 
-export const postLogin = () => {};
+export const postLogin = (
+  push: (path: string, state?: any) => void,
+  data: { username: string; password: string }
+) => (dispatch: Dispatch) => {
+  postUser(data)
+    .then(recievedData => {
+      // Really no need for this but put it here to kinda replicate getting a token.
+      if (data.username === recievedData.username) {
+        getToken()
+          .then(auth => {
+            dispatch(postLoginSuccess(auth));
+            push("/decision");
+          })
+          .catch(error => dispatch(postLoginFailure(error)));
+      } else {
+        dispatch(postLoginFailure("Could not log you in."));
+      }
+    })
+    .catch(err => dispatch(postLoginFailure(err)));
+};

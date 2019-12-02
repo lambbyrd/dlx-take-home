@@ -1,6 +1,3 @@
-import { IAnswer } from "./types";
-import { string } from "prop-types";
-
 interface IApplicationResponse {
   navPath: string;
   apiPath: string;
@@ -38,7 +35,7 @@ export const checkApplication = (answers: {
         decision: "APPROVED"
       }
     : {
-        navPath: "/disqualified",
+        navPath: "/decline",
         apiPath: "decisionDenied",
         decision: "DENIED"
       };
