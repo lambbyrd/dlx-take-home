@@ -42,24 +42,28 @@ export const sendApplication = (
     [key: string]: string | number;
   }
 ) => (dispatch: Dispatch) => {
-  const decision = checkApplication(answers);
-  if (decision.decision === BAD_REQUEST) {
-    //  This a fabricated bad request. A work around for not building out a more robust server
-    getBadRequest()
-      .then(data => {
-        // This should never fire
-        console.log("success", data);
-      })
-      .catch(err => dispatch(badRequest()));
+  if (answers) {
+    const decision = checkApplication(answers);
+    if (decision.decision === BAD_REQUEST) {
+      //  This a fabricated bad request. A work around for not building out a more robust server
+      getBadRequest()
+        .then(data => {
+          // This should never fire
+          console.log("success", data);
+        })
+        .catch(err => dispatch(badRequest()));
+    } else {
+      const { apiPath, navPath } = decision;
+      getDecision(apiPath)
+        .then(data => {
+          dispatch(applicationSuccess(data));
+          push(navPath);
+        })
+        .catch(err => {
+          dispatch(applicationFailure());
+        });
+    }
   } else {
-    const { apiPath, navPath } = decision;
-    getDecision(apiPath)
-      .then(data => {
-        dispatch(applicationSuccess(data));
-        push(navPath);
-      })
-      .catch(err => {
-        dispatch(applicationFailure());
-      });
+    dispatch(applicationFailure());
   }
 };
